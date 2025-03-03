@@ -164,7 +164,7 @@ Answer:
 )
 
 # Step 4: Define a function to interact with OpenAI's ChatGPT API
-def ask_chatgpt(question, documents, model="gpt-4o-mini"):
+def ask_chatgpt(question, documents, model="gpt-4o"):
     global client
     
     # Ensure client is initialized
@@ -211,7 +211,7 @@ class RAGApplication:
 
 # Original LLM pipeline (without RAG) for comparison
 class BasicLLMApplication:
-    def __init__(self, model="gpt-4o-mini"):
+    def __init__(self, model="gpt-4o"):
         self.model = model
 
     def run(self, question):
