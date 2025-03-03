@@ -1,0 +1,11 @@
+flask==2.3.3
+openai
+langchain
+langchain-community
+langchain-openai
+langchain-chroma
+langchain-ollama
+chromadb
+tiktoken
+beautifulsoup4
+requests

@@ -1,0 +1,55 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.answer-box {
+    min-height: 250px;
+    white-space: pre-line;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.card {
+    height: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #f1f8ff;
+}
+
+#submit-btn {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+#submit-btn:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+#url-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#loaded-urls-list {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.alert {
+    margin-bottom: 0.5rem;
+}
+
+/* Make URL text truncate with ellipsis if too long */
+.alert span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 40px);
+}

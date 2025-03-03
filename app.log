@@ -1,0 +1,9 @@
+USER_AGENT environment variable not set, consider setting it to identify your requests.
+Traceback (most recent call last):
+  File "/home/b150540215/RAGUI/app.py", line 9, in <module>
+    from ragpdfwithchatgpt import (
+  File "/home/b150540215/RAGUI/RAG with ChatGPT implementation/ragpdfwithchatgpt.py", line 17, in <module>
+    client = OpenAI(
+  File "/home/b150540215/.local/lib/python3.10/site-packages/openai/_client.py", line 110, in __init__
+    raise OpenAIError(
+openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
