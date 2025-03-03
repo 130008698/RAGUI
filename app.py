@@ -21,6 +21,16 @@ basic_llm_application = None
 # Track loaded URLs
 loaded_urls = []
 
+# Check if API key is available in environment variables and initialize right away
+if os.environ.get("OPENAI_API_KEY"):
+    try:
+        from ragpdfwithchatgpt import RAGApplication, BasicLLMApplication
+        rag_application = RAGApplication(None)
+        basic_llm_application = BasicLLMApplication()
+        print("Initialized with API key from environment variables")
+    except Exception as e:
+        print(f"Error initializing with environment API key: {e}")
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -29,7 +39,9 @@ def index():
 def setup():
     global rag_application, basic_llm_application
     data = request.json
-    api_key = data.get('api_key', '')
+    
+    # Try to get API key from request, fallback to environment variable
+    api_key = data.get('api_key', '') or os.environ.get("OPENAI_API_KEY", "")
     
     if not api_key:
         return jsonify({"error": "No API key provided"}), 400

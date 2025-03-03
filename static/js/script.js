@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const apiKeyInput = document.getElementById('api-key-input');
     const setupApiBtn = document.getElementById('setup-api-btn');
     const apiKeyStatus = document.getElementById('api-key-status');
+    const apiKeyCard = document.querySelector('.card:nth-child(1)'); // First card (API key)
     
     // Question asking elements
     const questionInput = document.getElementById('question-input');
@@ -26,6 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // URLs to be loaded
     let urlsToLoad = [];
     
+    // Check if API key is already set on the server
+    checkServerApiKey();
+    
     // Set up API key
     setupApiBtn.addEventListener('click', setupApiKey);
     apiKeyInput.addEventListener('keypress', function(e) {
@@ -36,6 +40,33 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Disable URL and question inputs initially
     disableInteraction();
+    
+    // Function to check if API key is already set on the server
+    function checkServerApiKey() {
+        fetch('/api/setup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ api_key: "" }), // Send empty key to check if server has one
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message && data.message === "API key set successfully") {
+                // Server already has API key set, hide API key input
+                apiKeyStatus.innerHTML = '<div class="alert alert-success mb-0">API key already configured on server!</div>';
+                apiKeySet = true;
+                enableInteraction();
+                
+                // Optionally hide the API key card completely
+                // apiKeyCard.style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.log('Server API key not set:', error);
+            // We'll use the manual input form
+        });
+    }
     
     
     // Add URL to the list
