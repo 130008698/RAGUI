@@ -1,15 +1,15 @@
 import os
 import pickle  # Import pickle for serialization
 import time  # Import time for measuring execution time
+
 import requests
 from bs4 import BeautifulSoup
-
 from langchain.prompts import PromptTemplate
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma  # Updated import
 from langchain_community.document_loaders import PyPDFLoader, WebBaseLoader
-from langchain_core.output_parsers import StrOutputParser
 from langchain_core.documents import Document
+from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama import ChatOllama
 from langchain_openai import OpenAIEmbeddings  # Updated import
 from openai import OpenAI
@@ -141,8 +141,14 @@ if __name__ == "__main__":
 
 # Step 3: Define Prompt Template for the Language Model
 prompt_template = PromptTemplate(
-    template="""You are an assistant for question-answering tasks.
-Use the following documents to answer the question. Use your own knowledge when documents do not have the answer.
+    template="""You are an AI assistant that engages in natural conversation while also answering medical-related questions **strictly based on the provided medical knowledge base**.
+
+Instructions:
+- If the user asks a **general** question, respond naturally as a helpful AI assistant.
+- If the user asks a **medical-related question** (e.g., symptoms, diagnosis, treatment, medications, conditions), use ONLY the retrieved medical knowledge base to respond.
+- If the relevant information is NOT found in the medical knowledge base, respond with: 
+  **"I am sorry, I can only provide information from the given medical knowledge base, and I don't have data on that topic. Do you want me to forward this question to your healthcare provider?"**
+- Do NOT generate medical information beyond what is retrieved.
 
 NEVER share the source of your response.
 Do not include document in your response.
