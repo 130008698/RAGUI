@@ -21,7 +21,7 @@ pip install -r requirements.txt
 2. Set your OpenAI API key as an environment variable:
 
 ```bash
-export OPENAI_API_KEY=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
+export OPENAI_API_KEY="YOUR_OPENAI_KEY"
 ```
 
 3. Run the Flask application:
